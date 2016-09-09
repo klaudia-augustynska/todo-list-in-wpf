@@ -10,15 +10,15 @@
                 <ColumnDefinition Width="80"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <CheckBox Grid.Column="0"></CheckBox>
-            <TextBlock Grid.Column="1">Oddać książkę do biblioteki</TextBlock>
-            <TextBlock Grid.Column="2">08.09.2016</TextBlock>
+            <TextBlock Grid.Column="1" Text="{Binding Name}"></TextBlock>
+            <TextBlock Grid.Column="2" Text="{Binding DueToDate}"></TextBlock>
         </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="TaskListItemTemplate">
         <StackPanel Orientation="Horizontal">
             <CheckBox />
-            <TextBlock>Naprawić błędy w aplikacji</TextBlock>
+            <TextBlock Text="{Binding Name}"></TextBlock>
         </StackPanel>
     </DataTemplate>
 

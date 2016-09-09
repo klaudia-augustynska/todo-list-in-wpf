@@ -81,6 +81,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DAL\TodoListContext.cs" />
+    <Compile Include="DesignViewModels\MainWindowDesignViewModel.cs" />
     <Compile Include="Views\EditTaskWindow.xaml.cs">
       <DependentUpon>EditTaskWindow.xaml</DependentUpon>
     </Compile>

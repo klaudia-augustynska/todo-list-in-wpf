@@ -4,12 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TodoList"
+        xmlns:designViewModels="clr-namespace:TodoList.DesignViewModels"
         mc:Ignorable="d"
         Title="TodoList" Height="400" Width="300">
 
     <Window.Resources>
 
         <ResourceDictionary>
+            <designViewModels:MainWindowDesignViewModel x:Key="DesignViewModel"></designViewModels:MainWindowDesignViewModel>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/TaskListStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
@@ -17,7 +20,7 @@
 
     </Window.Resources>
 
-    <Grid>
+    <Grid d:DataContext="{StaticResource DesignViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -45,7 +48,8 @@
 
             <Expander Header="Zaległe (1)" IsExpanded="True">
                 <ListBox HorizontalContentAlignment="Stretch"
-                         ItemTemplate="{StaticResource TaskListItemWithDateTemplate}">
+                         ItemTemplate="{StaticResource TaskListItemWithDateTemplate}"
+                         ItemsSource="{Binding OldTasks}">
                     <ListBox.ContextMenu >
                         <ContextMenu>
                             <MenuItem Header="Edytuj" />
@@ -57,7 +61,8 @@
 
             <Expander Header="Dzisiaj (2)" IsExpanded="True">
                 <ListBox HorizontalContentAlignment="Stretch"
-                         ItemTemplate="{StaticResource TaskListItemTemplate}">
+                         ItemTemplate="{StaticResource TaskListItemTemplate}"
+                         ItemsSource="{Binding CurrentTasks}">
                     <ListBox.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Edytuj" />
@@ -69,7 +74,8 @@
 
             <Expander Header="W tym tygodniu (1)" IsExpanded="True">
                 <ListBox HorizontalContentAlignment="Stretch"
-                         ItemTemplate="{StaticResource TaskListItemWithDateTemplate}">
+                         ItemTemplate="{StaticResource TaskListItemWithDateTemplate}"
+                         ItemsSource="{Binding FollowingTasks}">
                     <ListBox.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Edytuj" />

@@ -11,6 +11,7 @@ namespace TodoList.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public DateTime DateCreated { get; set; }
+        public DateTime DueToDate { get; set; }
         public bool Completed { get; set; }
 
         public Task()
