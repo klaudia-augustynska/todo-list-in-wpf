@@ -7,6 +7,100 @@
         mc:Ignorable="d"
         Title="TodoList" Height="400" Width="300">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
         
+        <TextBlock Text="Todo List"
+                   Grid.Row="0"></TextBlock>
+        
+        <DatePicker Grid.Row="1"></DatePicker>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Content="+"
+                    Grid.Column="0"></Button>
+            <TextBox Text="Treść nowego zadania"
+                     Grid.Column="1"></TextBox>
+        </Grid>
+        
+        <StackPanel Grid.Row="3">
+            
+            <Expander Header="Zaległe (1)" IsExpanded="True">
+                <ListBox HorizontalContentAlignment="Stretch">
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edytuj"></MenuItem>
+                            <MenuItem Header="Usuń"></MenuItem>
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+                    <ListBoxItem>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="80"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox Grid.Column="0"></CheckBox>
+                            <TextBlock Grid.Column="1">Oddać książkę do biblioteki</TextBlock>
+                            <TextBlock Grid.Column="2">08.09.2016</TextBlock>
+                        </Grid>
+                    </ListBoxItem>
+                </ListBox>
+            </Expander>
+
+            <Expander Header="Dzisiaj (2)" IsExpanded="True">
+                <ListBox HorizontalContentAlignment="Stretch">
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edytuj"></MenuItem>
+                            <MenuItem Header="Usuń"></MenuItem>
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+                    <ListBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox></CheckBox>
+                            <TextBlock>Naprawić błędy w aplikacji</TextBlock>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox></CheckBox>
+                            <TextBlock>Iść biegać</TextBlock>
+                        </StackPanel>
+                    </ListBoxItem>
+                </ListBox>
+            </Expander>
+
+            <Expander Header="W tym tygodniu (1)" IsExpanded="True">
+                <ListBox HorizontalContentAlignment="Stretch">
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edytuj"></MenuItem>
+                            <MenuItem Header="Usuń"></MenuItem>
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+                    <ListBoxItem>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="80"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox Grid.Column="0"></CheckBox>
+                            <TextBlock Grid.Column="1">Kupić łapkę na muchy</TextBlock>
+                            <TextBlock Grid.Column="2">10.09.2016</TextBlock>
+                        </Grid>
+                    </ListBoxItem>
+                </ListBox>
+            </Expander>
+            
+        </StackPanel>
     </Grid>
 </Window>
