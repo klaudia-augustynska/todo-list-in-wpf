@@ -49,39 +49,24 @@
             <Expander Header="Zaległe (1)" IsExpanded="True">
                 <ListBox HorizontalContentAlignment="Stretch"
                          ItemTemplate="{StaticResource TaskListItemWithDateTemplate}"
-                         ItemsSource="{Binding OldTasks}">
-                    <ListBox.ContextMenu >
-                        <ContextMenu>
-                            <MenuItem Header="Edytuj" />
-                            <MenuItem Header="Usuń" />
-                        </ContextMenu>
-                    </ListBox.ContextMenu>
+                         ItemsSource="{Binding OldTasks}"
+                         ContextMenu="{StaticResource TaskListContextMenuTemplate}">
                 </ListBox>
             </Expander>
 
             <Expander Header="Dzisiaj (2)" IsExpanded="True">
                 <ListBox HorizontalContentAlignment="Stretch"
                          ItemTemplate="{StaticResource TaskListItemTemplate}"
-                         ItemsSource="{Binding CurrentTasks}">
-                    <ListBox.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Edytuj" />
-                            <MenuItem Header="Usuń" />
-                        </ContextMenu>
-                    </ListBox.ContextMenu>
+                         ItemsSource="{Binding CurrentTasks}"
+                         ContextMenu="{StaticResource TaskListContextMenuTemplate}">
                 </ListBox>
             </Expander>
 
             <Expander Header="W tym tygodniu (1)" IsExpanded="True">
                 <ListBox HorizontalContentAlignment="Stretch"
                          ItemTemplate="{StaticResource TaskListItemWithDateTemplate}"
-                         ItemsSource="{Binding FollowingTasks}">
-                    <ListBox.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Edytuj" />
-                            <MenuItem Header="Usuń" />
-                        </ContextMenu>
-                    </ListBox.ContextMenu>
+                         ItemsSource="{Binding FollowingTasks}"
+                         ContextMenu="{StaticResource TaskListContextMenuTemplate}">
                 </ListBox>
             </Expander>
 

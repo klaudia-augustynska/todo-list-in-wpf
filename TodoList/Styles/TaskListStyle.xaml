@@ -22,4 +22,9 @@
         </StackPanel>
     </DataTemplate>
 
+    <ContextMenu x:Key="TaskListContextMenuTemplate">
+        <MenuItem Header="Edytuj" />
+        <MenuItem Header="Usuń" />
+    </ContextMenu>
+
 </ResourceDictionary>
