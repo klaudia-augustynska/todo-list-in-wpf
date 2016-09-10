@@ -50,7 +50,10 @@
 
         <StackPanel Grid.Row="3">
 
-            <Expander Header="Zaległe (1)" IsExpanded="True">
+            <Expander IsExpanded="True">
+                <Expander.Header>
+                    <TextBlock Text="{Binding OldTasks.Count, StringFormat=Zaległe ({0})}"></TextBlock>
+                </Expander.Header>
                 <StackPanel>
                     <ListBox HorizontalContentAlignment="Stretch"
                          ItemTemplate="{StaticResource TaskListItemWithDateTemplate}"
@@ -63,7 +66,10 @@
                 </StackPanel>
             </Expander>
 
-            <Expander Header="Dzisiaj (2)" IsExpanded="True">
+            <Expander IsExpanded="True">
+                <Expander.Header>
+                    <TextBlock Text="{Binding CurrentTasks.Count, StringFormat=Dzisiaj ({0})}"></TextBlock>
+                </Expander.Header>
                 <StackPanel>
                     <ListBox HorizontalContentAlignment="Stretch"
                          ItemTemplate="{StaticResource TaskListItemTemplate}"
@@ -76,7 +82,10 @@
                 </StackPanel>
             </Expander>
 
-            <Expander Header="W tym tygodniu (1)" IsExpanded="True">
+            <Expander IsExpanded="True">
+                <Expander.Header>
+                    <TextBlock Text="{Binding FollowingTasks.Count, StringFormat=W tym tygodniu ({0})}"></TextBlock>
+                </Expander.Header>
                 <StackPanel>
                     <ListBox HorizontalContentAlignment="Stretch"
                          ItemTemplate="{StaticResource TaskListItemWithDateTemplate}"
