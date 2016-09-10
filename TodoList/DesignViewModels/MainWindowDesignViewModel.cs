@@ -14,7 +14,8 @@ namespace TodoList.DesignViewModels
 
         public MainWindowDesignViewModel()
         {
-            OldTasks = GetOldTasks();
+            //OldTasks = GetOldTasks();
+            OldTasks = new List<Task>();
             CurrentTasks = GetCurrentTasks();
             FollowingTasks = GetFollowingTasks();
         }

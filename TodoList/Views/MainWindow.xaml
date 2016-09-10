@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TodoList"
         xmlns:designViewModels="clr-namespace:TodoList.DesignViewModels"
+        xmlns:helpers="clr-namespace:TodoList.Helpers"
         mc:Ignorable="d"
         Title="TodoList" Height="400" Width="300">
 
@@ -13,6 +14,9 @@
         <ResourceDictionary>
             <designViewModels:MainWindowDesignViewModel x:Key="DesignViewModel"></designViewModels:MainWindowDesignViewModel>
 
+            <helpers:ListToVisibilityConverter x:Key="ListToVisibilityConverter"></helpers:ListToVisibilityConverter>
+            <helpers:ListToVisibilityNegatedConverter x:Key="ListToVisibilityNegatedConverter"></helpers:ListToVisibilityNegatedConverter>
+            
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/TaskListStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
@@ -47,27 +51,42 @@
         <StackPanel Grid.Row="3">
 
             <Expander Header="Zaległe (1)" IsExpanded="True">
-                <ListBox HorizontalContentAlignment="Stretch"
+                <StackPanel>
+                    <ListBox HorizontalContentAlignment="Stretch"
                          ItemTemplate="{StaticResource TaskListItemWithDateTemplate}"
                          ItemsSource="{Binding OldTasks}"
+                         Visibility="{Binding OldTasks, Converter={StaticResource ListToVisibilityConverter}}"
                          ContextMenu="{StaticResource TaskListContextMenuTemplate}">
-                </ListBox>
+                    </ListBox>
+                    <TextBlock Visibility="{Binding OldTasks, Converter={StaticResource ListToVisibilityNegatedConverter}}"
+                           Text="Brak zadań do wyświetlenia"></TextBlock>
+                </StackPanel>
             </Expander>
 
             <Expander Header="Dzisiaj (2)" IsExpanded="True">
-                <ListBox HorizontalContentAlignment="Stretch"
+                <StackPanel>
+                    <ListBox HorizontalContentAlignment="Stretch"
                          ItemTemplate="{StaticResource TaskListItemTemplate}"
                          ItemsSource="{Binding CurrentTasks}"
+                         Visibility="{Binding CurrentTasks, Converter={StaticResource ListToVisibilityConverter}}"
                          ContextMenu="{StaticResource TaskListContextMenuTemplate}">
-                </ListBox>
+                    </ListBox>
+                    <TextBlock Visibility="{Binding CurrentTasks, Converter={StaticResource ListToVisibilityNegatedConverter}}"
+                           Text="Brak zadań do wyświetlenia"></TextBlock>
+                </StackPanel>
             </Expander>
 
             <Expander Header="W tym tygodniu (1)" IsExpanded="True">
-                <ListBox HorizontalContentAlignment="Stretch"
+                <StackPanel>
+                    <ListBox HorizontalContentAlignment="Stretch"
                          ItemTemplate="{StaticResource TaskListItemWithDateTemplate}"
                          ItemsSource="{Binding FollowingTasks}"
+                         Visibility="{Binding FollowingTasks, Converter={StaticResource ListToVisibilityConverter}}"
                          ContextMenu="{StaticResource TaskListContextMenuTemplate}">
-                </ListBox>
+                    </ListBox>
+                    <TextBlock Visibility="{Binding FollowingTasks, Converter={StaticResource ListToVisibilityNegatedConverter}}"
+                           Text="Brak zadań do wyświetlenia"></TextBlock>
+                </StackPanel>
             </Expander>
 
         </StackPanel>
