@@ -80,10 +80,25 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DAL\IUnitOfWork.cs" />
+    <Compile Include="DAL\Repositories\IRepository.cs" />
+    <Compile Include="DAL\Repositories\ITaskItemRepository.cs" />
+    <Compile Include="DAL\Repositories\Repository.cs" />
+    <Compile Include="DAL\Repositories\TaskItemRepository.cs" />
     <Compile Include="DAL\TodoListContext.cs" />
+    <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="DesignViewModels\MainWindowDesignViewModel.cs" />
     <Compile Include="Helpers\ListToVisibilityConverter.cs" />
     <Compile Include="Helpers\ListToVisibilityNegatedConverter.cs" />
+    <Compile Include="Migrations\201609111048473_InitialCreate.cs" />
+    <Compile Include="Migrations\201609111048473_InitialCreate.Designer.cs">
+      <DependentUpon>201609111048473_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609111100022_migracja.cs" />
+    <Compile Include="Migrations\201609111100022_migracja.Designer.cs">
+      <DependentUpon>201609111100022_migracja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\EditTaskWindow.xaml.cs">
       <DependentUpon>EditTaskWindow.xaml</DependentUpon>
@@ -108,6 +123,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201609111048473_InitialCreate.resx">
+      <DependentUpon>201609111048473_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609111100022_migracja.resx">
+      <DependentUpon>201609111100022_migracja.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
