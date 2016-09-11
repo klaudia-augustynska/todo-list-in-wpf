@@ -7,7 +7,7 @@ using TodoList.Models;
 
 namespace TodoList.ViewModels
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : ViewModelBase
     {
         public ObservableCollection<Task> OldTasks { get; set; }
         public ObservableCollection<Task> CurrentTasks { get; set; }
