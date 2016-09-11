@@ -9,9 +9,17 @@ namespace TodoList.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        private string _taskName;
+
         public ObservableCollection<TaskItem> OldTasks { get; set; }
         public ObservableCollection<TaskItem> CurrentTasks { get; set; }
         public ObservableCollection<TaskItem> FollowingTasks { get; set; }
+
+        public string TaskName
+        {
+            get { return _taskName; }
+            set { _taskName = value; NotifyPropertyChanged(nameof(TaskName)); }
+        }
 
         public MainWindowViewModel()
         {
