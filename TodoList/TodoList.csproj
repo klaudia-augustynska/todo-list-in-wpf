@@ -84,6 +84,7 @@
     <Compile Include="DesignViewModels\MainWindowDesignViewModel.cs" />
     <Compile Include="Helpers\ListToVisibilityConverter.cs" />
     <Compile Include="Helpers\ListToVisibilityNegatedConverter.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\EditTaskWindow.xaml.cs">
       <DependentUpon>EditTaskWindow.xaml</DependentUpon>
     </Compile>
@@ -121,6 +122,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

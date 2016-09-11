@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TodoList"
         xmlns:designViewModels="clr-namespace:TodoList.DesignViewModels"
+        xmlns:vm="clr-namespace:TodoList.ViewModels"
         xmlns:helpers="clr-namespace:TodoList.Helpers"
         mc:Ignorable="d"
         Title="TodoList" Height="400" Width="300">
+    
+    <Window.DataContext>
+        <vm:MainWindowViewModel></vm:MainWindowViewModel>
+    </Window.DataContext>
 
     <Window.Resources>
 
