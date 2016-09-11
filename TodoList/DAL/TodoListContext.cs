@@ -14,7 +14,7 @@ namespace TodoList.DAL
         {
         }
 
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<TaskItem> Tasks { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

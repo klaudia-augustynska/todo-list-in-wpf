@@ -23,13 +23,13 @@ namespace TodoList.Tests.DAL.Tests
         public void UnitOfWork_CanCreate()
         {
             var exception = false;
-            Task task = null;
+            TaskItem task = null;
             const string taskName = "Testowe zadanie";
             var taskNameResult = string.Empty;
 
             using (var db = new UnitOfWork())
             {
-                db.Tasks.Add(new Task() { Name = taskName });
+                db.Tasks.Add(new TaskItem() { Name = taskName });
                 db.Complete();
 
                 try
@@ -55,7 +55,7 @@ namespace TodoList.Tests.DAL.Tests
         [Test]
         public void UnitOfWork_CanUpdate()
         {
-            var task = new Task() {Name = "name"};
+            var task = new TaskItem() {Name = "name"};
             var taskNameAfter = "test";
             var taskNameResult = string.Empty;
 
@@ -76,7 +76,7 @@ namespace TodoList.Tests.DAL.Tests
         [Test]
         public void UnitOfWork_CanDelete()
         {
-            var task = new Task() { Name = "name" };
+            var task = new TaskItem() { Name = "name" };
             var idExists = false;
 
             using (var db = new UnitOfWork())

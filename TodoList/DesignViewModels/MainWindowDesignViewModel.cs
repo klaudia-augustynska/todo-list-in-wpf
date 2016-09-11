@@ -8,28 +8,28 @@ namespace TodoList.DesignViewModels
 {
     public class MainWindowDesignViewModel
     {
-        public List<Task> OldTasks { get; set; }
-        public List<Task> CurrentTasks { get; set; }
-        public List<Task> FollowingTasks { get; set; }
+        public List<TaskItem> OldTasks { get; set; }
+        public List<TaskItem> CurrentTasks { get; set; }
+        public List<TaskItem> FollowingTasks { get; set; }
 
         public MainWindowDesignViewModel()
         {
             //OldTasks = GetOldTasks();
-            OldTasks = new List<Task>();
+            OldTasks = new List<TaskItem>();
             CurrentTasks = GetCurrentTasks();
             FollowingTasks = GetFollowingTasks();
         }
 
-        private List<Task> GetFollowingTasks()
+        private List<TaskItem> GetFollowingTasks()
         {
-            return new List<Task>()
+            return new List<TaskItem>()
             {
-                new Task()
+                new TaskItem()
                 {
                     Name = "Oddać książkę do biblioteki",
                     DueToDate = DateTime.Now.AddDays(1)
                 },
-                new Task()
+                new TaskItem()
                 {
                     Name = "Sprawdzić pociąg",
                     DueToDate = DateTime.Now.AddDays(1)
@@ -37,16 +37,16 @@ namespace TodoList.DesignViewModels
             };
         }
 
-        private List<Task> GetCurrentTasks()
+        private List<TaskItem> GetCurrentTasks()
         {
-            return new List<Task>()
+            return new List<TaskItem>()
             {
-                new Task()
+                new TaskItem()
                 {
                     Name = "Naprawić błędy w aplikacji",
                     DueToDate = DateTime.Now
                 },
-                new Task()
+                new TaskItem()
                 {
                     Name = "Iść biegać",
                     DueToDate = DateTime.Now
@@ -54,11 +54,11 @@ namespace TodoList.DesignViewModels
             };
         }
 
-        private List<Task> GetOldTasks()
+        private List<TaskItem> GetOldTasks()
         {
-            return new List<Task>()
+            return new List<TaskItem>()
             {
-                new Task()
+                new TaskItem()
                 {
                     Name = "Zjeść kanapkę",
                     DueToDate = new DateTime(2016,09,08)

@@ -9,15 +9,15 @@ namespace TodoList.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public ObservableCollection<Task> OldTasks { get; set; }
-        public ObservableCollection<Task> CurrentTasks { get; set; }
-        public ObservableCollection<Task> FollowingTasks { get; set; }
+        public ObservableCollection<TaskItem> OldTasks { get; set; }
+        public ObservableCollection<TaskItem> CurrentTasks { get; set; }
+        public ObservableCollection<TaskItem> FollowingTasks { get; set; }
 
         public MainWindowViewModel()
         {
-            OldTasks = new ObservableCollection<Task>();
-            CurrentTasks = new ObservableCollection<Task>();
-            FollowingTasks = new ObservableCollection<Task>();
+            OldTasks = new ObservableCollection<TaskItem>();
+            CurrentTasks = new ObservableCollection<TaskItem>();
+            FollowingTasks = new ObservableCollection<TaskItem>();
         }
     }
 }

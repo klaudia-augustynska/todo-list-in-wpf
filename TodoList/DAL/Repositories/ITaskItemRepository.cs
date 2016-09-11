@@ -6,7 +6,7 @@ using TodoList.Models;
 
 namespace TodoList.DAL.Repositories
 {
-    public interface ITaskItemRepository : IRepository<Task>
+    public interface ITaskItemRepository : IRepository<TaskItem>
     {
     }
 }

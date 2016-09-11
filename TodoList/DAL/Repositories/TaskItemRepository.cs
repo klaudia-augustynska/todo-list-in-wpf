@@ -7,7 +7,7 @@ using TodoList.Models;
 
 namespace TodoList.DAL.Repositories
 {
-    public class TaskItemRepository : Repository<Task>, ITaskItemRepository
+    public class TaskItemRepository : Repository<TaskItem>, ITaskItemRepository
     {
         public TaskItemRepository(DbContext context) 
             : base(context)

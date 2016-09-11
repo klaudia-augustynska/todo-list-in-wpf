@@ -27,13 +27,13 @@ namespace TodoList.Tests.ViewModels.Tests
         {
             var propertiesChanged = new List<string>();
             var vm = new MainWindowViewModel();
-            vm.OldTasks.CollectionChanged += (s, e) => propertiesChanged.Add(((Task)e.NewItems[0]).Name);
-            vm.CurrentTasks.CollectionChanged += (s, e) => propertiesChanged.Add(((Task)e.NewItems[0]).Name);
-            vm.FollowingTasks.CollectionChanged += (s, e) => propertiesChanged.Add(((Task)e.NewItems[0]).Name);
+            vm.OldTasks.CollectionChanged += (s, e) => propertiesChanged.Add(((TaskItem)e.NewItems[0]).Name);
+            vm.CurrentTasks.CollectionChanged += (s, e) => propertiesChanged.Add(((TaskItem)e.NewItems[0]).Name);
+            vm.FollowingTasks.CollectionChanged += (s, e) => propertiesChanged.Add(((TaskItem)e.NewItems[0]).Name);
 
-            vm.OldTasks.Add(new Task() {Name = "test"});
-            vm.CurrentTasks.Add(new Task() { Name = "test" });
-            vm.FollowingTasks.Add(new Task() { Name = "test" });
+            vm.OldTasks.Add(new TaskItem() {Name = "test"});
+            vm.CurrentTasks.Add(new TaskItem() { Name = "test" });
+            vm.FollowingTasks.Add(new TaskItem() { Name = "test" });
 
             Assert.Contains("test", propertiesChanged);
             Assert.Contains("test", propertiesChanged);

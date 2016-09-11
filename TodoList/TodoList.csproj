@@ -98,6 +98,10 @@
     <Compile Include="Migrations\201609111100022_migracja.Designer.cs">
       <DependentUpon>201609111100022_migracja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609111140591_migracja2.cs" />
+    <Compile Include="Migrations\201609111140591_migracja2.Designer.cs">
+      <DependentUpon>201609111140591_migracja2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -110,7 +114,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Task.cs" />
+    <Compile Include="Models\TaskItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -129,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609111100022_migracja.resx">
       <DependentUpon>201609111100022_migracja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609111140591_migracja2.resx">
+      <DependentUpon>201609111140591_migracja2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

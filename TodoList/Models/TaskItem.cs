@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TodoList.Models
 {
-    public class Task
+    public class TaskItem
     {
         private DateTime _dueToDate;
 
@@ -30,7 +30,7 @@ namespace TodoList.Models
 
         public bool Completed { get; set; }
 
-        public Task()
+        public TaskItem()
         {
             Completed = false;
         }
