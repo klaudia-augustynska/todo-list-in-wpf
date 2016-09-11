@@ -49,8 +49,26 @@
             </Grid.ColumnDefinitions>
             <Button Content="+"
                     Grid.Column="0" />
-            <TextBox Text="Treść nowego zadania"
-                     Grid.Column="1" />
+            <Grid Grid.Column="1">
+                <TextBox Name="TaskName"
+                         Text="{Binding TaskName, Mode=TwoWay}" />
+                <TextBlock Text="Treść nowego zadania"
+                           IsHitTestVisible="False">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=TaskName}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsFocused, ElementName=TaskName}" Value="true">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
         </Grid>
 
         <StackPanel Grid.Row="3">

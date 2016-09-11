@@ -11,6 +11,7 @@ namespace TodoList.DesignViewModels
         public List<TaskItem> OldTasks { get; set; }
         public List<TaskItem> CurrentTasks { get; set; }
         public List<TaskItem> FollowingTasks { get; set; }
+        public string TaskName { get; set; }
 
         public MainWindowDesignViewModel()
         {
@@ -18,6 +19,7 @@ namespace TodoList.DesignViewModels
             OldTasks = new List<TaskItem>();
             CurrentTasks = GetCurrentTasks();
             FollowingTasks = GetFollowingTasks();
+            TaskName = string.Empty;
         }
 
         private List<TaskItem> GetFollowingTasks()
