@@ -93,7 +93,7 @@
 
             <Expander IsExpanded="True">
                 <Expander.Header>
-                    <TextBlock Text="{Binding CurrentTasks.Count, StringFormat=Dzisiaj ({0})}"></TextBlock>
+                    <TextBlock Text="{Binding CurrentTasks.Count, StringFormat=Wybrany dzień ({0})}"></TextBlock>
                 </Expander.Header>
                 <StackPanel>
                     <ListBox HorizontalContentAlignment="Stretch"
