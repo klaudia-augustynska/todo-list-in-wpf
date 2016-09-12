@@ -25,6 +25,7 @@ namespace TodoList.Tests.ViewModels.Tests
             Assert.IsNotNull(vm.CurrentTasks);
             Assert.IsNotNull(vm.FollowingTasks);
             Assert.AreNotEqual(default(DateTime), vm.SelectedDate);
+            Assert.IsTrue(vm.Loading);
         }
 
         [Test]

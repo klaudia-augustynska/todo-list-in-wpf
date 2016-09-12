@@ -22,7 +22,8 @@
 
             <helpers:ListToVisibilityConverter x:Key="ListToVisibilityConverter"></helpers:ListToVisibilityConverter>
             <helpers:ListToVisibilityNegatedConverter x:Key="ListToVisibilityNegatedConverter"></helpers:ListToVisibilityNegatedConverter>
-
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
+            
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/TaskListStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
@@ -88,7 +89,7 @@
 
         <StackPanel Grid.Row="3">
 
-            <Expander IsExpanded="True">
+            <Expander IsExpanded="False">
                 <Expander.Header>
                     <TextBlock Text="{Binding OldTasks.Count, StringFormat=Zaległe ({0})}"></TextBlock>
                 </Expander.Header>
@@ -99,8 +100,20 @@
                          Visibility="{Binding OldTasks, Converter={StaticResource ListToVisibilityConverter}}"
                          ContextMenu="{StaticResource TaskListContextMenuTemplate}">
                     </ListBox>
-                    <TextBlock Visibility="{Binding OldTasks, Converter={StaticResource ListToVisibilityNegatedConverter}}"
-                           Text="Brak zadań do wyświetlenia"></TextBlock>
+                    <TextBlock Text="Brak zadań do wyświetlenia">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="{Binding OldTasks, Converter={StaticResource ListToVisibilityNegatedConverter}}"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Loading}" Value="true">
+                                        <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Text="Proszę czekać..." 
+                               Visibility="{Binding Loading, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}"></TextBlock>
                 </StackPanel>
             </Expander>
 
@@ -115,12 +128,24 @@
                          Visibility="{Binding CurrentTasks, Converter={StaticResource ListToVisibilityConverter}}"
                          ContextMenu="{StaticResource TaskListContextMenuTemplate}">
                     </ListBox>
-                    <TextBlock Visibility="{Binding CurrentTasks, Converter={StaticResource ListToVisibilityNegatedConverter}}"
-                           Text="Brak zadań do wyświetlenia"></TextBlock>
+                    <TextBlock Text="Brak zadań do wyświetlenia">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="{Binding CurrentTasks, Converter={StaticResource ListToVisibilityNegatedConverter}}"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Loading}" Value="true">
+                                        <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Text="Proszę czekać..." 
+                               Visibility="{Binding Loading, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}"></TextBlock>
                 </StackPanel>
             </Expander>
 
-            <Expander IsExpanded="True">
+            <Expander IsExpanded="False">
                 <Expander.Header>
                     <TextBlock Text="{Binding FollowingTasks.Count, StringFormat=Nadchodzące w tygodniu ({0})}"></TextBlock>
                 </Expander.Header>
@@ -131,8 +156,20 @@
                          Visibility="{Binding FollowingTasks, Converter={StaticResource ListToVisibilityConverter}}"
                          ContextMenu="{StaticResource TaskListContextMenuTemplate}">
                     </ListBox>
-                    <TextBlock Visibility="{Binding FollowingTasks, Converter={StaticResource ListToVisibilityNegatedConverter}}"
-                           Text="Brak zadań do wyświetlenia"></TextBlock>
+                    <TextBlock Text="Brak zadań do wyświetlenia">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="{Binding FollowingTasks, Converter={StaticResource ListToVisibilityNegatedConverter}}"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Loading}" Value="true">
+                                        <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Text="Proszę czekać..." 
+                               Visibility="{Binding Loading, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}"></TextBlock>
                 </StackPanel>
             </Expander>
 

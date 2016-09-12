@@ -37,6 +37,7 @@ namespace TodoList.ViewModels
                     CurrentTasks = DownloadTasks(db, FindCurrentTasks);
                     FollowingTasks = DownloadTasks(db, FindFollowingTasks);
                 }
+                Loading = false;
             });
         }
 

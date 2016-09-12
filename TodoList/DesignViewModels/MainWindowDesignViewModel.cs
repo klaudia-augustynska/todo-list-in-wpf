@@ -13,6 +13,7 @@ namespace TodoList.DesignViewModels
         public List<TaskItem> FollowingTasks { get; set; }
         public string TaskName { get; set; }
         public DateTime SelectedDate { get; set; }
+        public bool Loading { get; set; }
 
         public MainWindowDesignViewModel()
         {
@@ -22,6 +23,7 @@ namespace TodoList.DesignViewModels
             FollowingTasks = GetFollowingTasks();
             TaskName = string.Empty;
             SelectedDate = DateTime.Now;
+            Loading = true;
         }
 
         private List<TaskItem> GetFollowingTasks()
