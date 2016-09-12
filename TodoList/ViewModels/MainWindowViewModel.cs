@@ -13,6 +13,7 @@ namespace TodoList.ViewModels
     public partial class MainWindowViewModel : ViewModelBase, ISubscriber<TaskItemAdded>
     {
         private string _taskName;
+        private DateTime _selectedDate;
         private IEventAggregator EventAggregator { get; set; }
 
         public ObservableCollection<TaskItem> OldTasks { get; set; }
@@ -29,7 +30,15 @@ namespace TodoList.ViewModels
             }
         }
 
-        public DateTime TaskDueToDate { get; set; }
+        public DateTime SelectedDate
+        {
+            get { return _selectedDate; }
+            set
+            {
+                _selectedDate = value;
+                NotifyPropertyChanged(nameof(SelectedDate));
+            }
+        }
 
         public MainWindowViewModel()
         {
@@ -42,7 +51,7 @@ namespace TodoList.ViewModels
         private void InitializeProperties()
         {
             TaskName = string.Empty;
-            TaskDueToDate = DateTime.Now;
+            SelectedDate = DateTime.Now;
         }
 
         private void InitializeEventAggregator()
@@ -68,9 +77,9 @@ namespace TodoList.ViewModels
 
         private void PutEventToList(TaskItem task)
         {
-            if (task.DueToDate.Date == TaskDueToDate.Date)
+            if (task.DueToDate.Date == SelectedDate.Date)
                 CurrentTasks.Add(task);
-            else if (task.DueToDate.Date < TaskDueToDate.Date)
+            else if (task.DueToDate.Date < SelectedDate.Date)
                 OldTasks.Add(task);
             else if (IsInThisWeek(task.DueToDate))
                 FollowingTasks.Add(task);
@@ -78,9 +87,9 @@ namespace TodoList.ViewModels
 
         private bool IsInThisWeek(DateTime date)
         {
-            int daysToLastDayOfWeek = 7 - (int)TaskDueToDate.DayOfWeek;
-            DateTime endOfTheWeek = TaskDueToDate.AddDays(daysToLastDayOfWeek);
-            if (date.Date > TaskDueToDate.Date && date.Date <= endOfTheWeek.Date)
+            int daysToLastDayOfWeek = 7 - (int)SelectedDate.DayOfWeek;
+            DateTime endOfTheWeek = SelectedDate.AddDays(daysToLastDayOfWeek);
+            if (date.Date > SelectedDate.Date && date.Date <= endOfTheWeek.Date)
                 return true;
             return false;
         }
