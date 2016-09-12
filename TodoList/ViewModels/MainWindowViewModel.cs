@@ -12,13 +12,39 @@ namespace TodoList.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase, ISubscriber<TaskItemAdded>
     {
-        private string _taskName;
-        private DateTime _selectedDate;
         private IEventAggregator EventAggregator { get; set; }
 
-        public ObservableCollection<TaskItem> OldTasks { get; set; }
-        public ObservableCollection<TaskItem> CurrentTasks { get; set; }
-        public ObservableCollection<TaskItem> FollowingTasks { get; set; }
+        private string _taskName;
+        private DateTime _selectedDate;
+        private ObservableCollection<TaskItem> _currentTasks, _oldTasks, _followingTasks;
+
+        public ObservableCollection<TaskItem> OldTasks
+        {
+            get { return _oldTasks; }
+            set
+            {
+                _oldTasks = value;
+                NotifyPropertyChanged(nameof(OldTasks));
+            }
+        }
+        public ObservableCollection<TaskItem> CurrentTasks
+        {
+            get { return _currentTasks; }
+            set
+            {
+                _currentTasks = value;
+                NotifyPropertyChanged(nameof(CurrentTasks));
+            }
+        }
+        public ObservableCollection<TaskItem> FollowingTasks
+        {
+            get { return _followingTasks; }
+            set
+            {
+                _followingTasks = value;
+                NotifyPropertyChanged(nameof(FollowingTasks));
+            }
+        }
 
         public string TaskName
         {
@@ -77,21 +103,12 @@ namespace TodoList.ViewModels
 
         private void PutEventToList(TaskItem task)
         {
-            if (task.DueToDate.Date == SelectedDate.Date)
+            if (FindCurrentTasks(task))
                 CurrentTasks.Add(task);
-            else if (task.DueToDate.Date < SelectedDate.Date)
+            else if (FindOldTasks(task))
                 OldTasks.Add(task);
-            else if (IsInThisWeek(task.DueToDate))
+            else if (FindFollowingTasks(task))
                 FollowingTasks.Add(task);
-        }
-
-        private bool IsInThisWeek(DateTime date)
-        {
-            int daysToLastDayOfWeek = 7 - (int)SelectedDate.DayOfWeek;
-            DateTime endOfTheWeek = SelectedDate.AddDays(daysToLastDayOfWeek);
-            if (date.Date > SelectedDate.Date && date.Date <= endOfTheWeek.Date)
-                return true;
-            return false;
         }
     }
 }
