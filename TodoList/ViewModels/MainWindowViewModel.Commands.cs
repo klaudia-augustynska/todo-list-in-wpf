@@ -45,7 +45,7 @@ namespace TodoList.ViewModels
         {
             try
             {
-                var list = db.Tasks.Where(predicate).ToList();
+                var list = db.Tasks.Where(predicate).OrderBy(x => x.DueToDate).ToList();
                 return new ObservableCollection<TaskItem>(list);
             }
             catch (ArgumentNullException)
