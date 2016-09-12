@@ -33,15 +33,15 @@ namespace TodoList.ViewModels
             {
                 using (var db = new TodoListContext())
                 {
-                    OldTasks = DownloadTasks(db, FindOldTasks);
-                    CurrentTasks = DownloadTasks(db, FindCurrentTasks);
-                    FollowingTasks = DownloadTasks(db, FindFollowingTasks);
+                    OldTasks = GetTasks(db, FindOldTasks);
+                    CurrentTasks = GetTasks(db, FindCurrentTasks);
+                    FollowingTasks = GetTasks(db, FindFollowingTasks);
                 }
                 Loading = false;
             });
         }
 
-        private ObservableCollection<TaskItem> DownloadTasks(TodoListContext db, Func<TaskItem, bool> predicate)
+        private ObservableCollection<TaskItem> GetTasks(TodoListContext db, Func<TaskItem, bool> predicate)
         {
             try
             {
