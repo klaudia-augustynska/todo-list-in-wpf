@@ -93,7 +93,7 @@
             </Grid>
         </Grid>
 
-        <ScrollViewer Grid.Row="3"
+        <ScrollViewer Grid.Row="3" 
                       VerticalScrollBarVisibility="Auto">
 
             <StackPanel>
@@ -107,7 +107,8 @@
                          ItemTemplate="{StaticResource TaskListItemWithDateTemplate}"
                          ItemsSource="{Binding OldTasks, Mode=TwoWay}"
                          Visibility="{Binding OldTasks, Converter={StaticResource ListToVisibilityConverter}}"
-                         ContextMenu="{StaticResource TaskListContextMenuTemplate}">
+                         ContextMenu="{StaticResource TaskListContextMenuTemplate}" 
+                         Style="{DynamicResource ListBoxWithoutScrollViewer}">
                         </ListBox>
                         <TextBlock Text="Brak zadań do wyświetlenia">
                             <TextBlock.Style>
@@ -135,7 +136,8 @@
                          ItemTemplate="{StaticResource TaskListItemTemplate}"
                          ItemsSource="{Binding CurrentTasks, Mode=TwoWay}"
                          Visibility="{Binding CurrentTasks, Converter={StaticResource ListToVisibilityConverter}}"
-                         ContextMenu="{StaticResource TaskListContextMenuTemplate}">
+                         ContextMenu="{StaticResource TaskListContextMenuTemplate}"
+                         Style="{DynamicResource ListBoxWithoutScrollViewer}">
                         </ListBox>
                         <TextBlock Text="Brak zadań do wyświetlenia">
                             <TextBlock.Style>
@@ -163,7 +165,8 @@
                          ItemTemplate="{StaticResource TaskListItemWithDateTemplate}"
                          ItemsSource="{Binding FollowingTasks, Mode=TwoWay}"
                          Visibility="{Binding FollowingTasks, Converter={StaticResource ListToVisibilityConverter}}"
-                         ContextMenu="{StaticResource TaskListContextMenuTemplate}">
+                         ContextMenu="{StaticResource TaskListContextMenuTemplate}"
+                         Style="{DynamicResource ListBoxWithoutScrollViewer}">
                         </ListBox>
                         <TextBlock Text="Brak zadań do wyświetlenia">
                             <TextBlock.Style>
