@@ -12,6 +12,7 @@ namespace TodoList.DesignViewModels
         public List<TaskItem> CurrentTasks { get; set; }
         public List<TaskItem> FollowingTasks { get; set; }
         public string TaskName { get; set; }
+        public DateTime SelectedDate { get; set; }
 
         public MainWindowDesignViewModel()
         {
@@ -20,6 +21,7 @@ namespace TodoList.DesignViewModels
             CurrentTasks = GetCurrentTasks();
             FollowingTasks = GetFollowingTasks();
             TaskName = string.Empty;
+            SelectedDate = DateTime.Now;
         }
 
         private List<TaskItem> GetFollowingTasks()

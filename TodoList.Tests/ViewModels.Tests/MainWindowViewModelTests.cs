@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using TodoList.Models;
 using NUnit.Framework;
+using TodoList.DAL;
+using TodoList.Helpers.EventAggregator;
 using TodoList.ViewModels;
 
 namespace TodoList.Tests.ViewModels.Tests
@@ -20,6 +24,7 @@ namespace TodoList.Tests.ViewModels.Tests
             Assert.IsNotNull(vm.OldTasks);
             Assert.IsNotNull(vm.CurrentTasks);
             Assert.IsNotNull(vm.FollowingTasks);
+            Assert.AreNotEqual(default(DateTime), vm.TaskDueToDate);
         }
 
         [Test]
@@ -41,6 +46,17 @@ namespace TodoList.Tests.ViewModels.Tests
             Assert.AreEqual("test", vm.OldTasks[0].Name);
             Assert.AreEqual("test", vm.CurrentTasks[0].Name);
             Assert.AreEqual("test", vm.FollowingTasks[0].Name);
+        }
+
+        [Test]
+        public void AddNewTaskCommand_WhenEmptyTaskName_CannotExecute()
+        {
+            var vm = new MainWindowViewModel { TaskName = string.Empty };
+            var canExecute = false;
+
+            canExecute = vm.AddNewTaskCommand.CanExecute(null);
+
+            Assert.IsFalse(canExecute);
         }
     }
 }

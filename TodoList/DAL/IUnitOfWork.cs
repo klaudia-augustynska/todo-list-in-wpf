@@ -10,6 +10,6 @@ namespace TodoList.DAL
     public interface IUnitOfWork : IDisposable
     {
         ITaskItemRepository Tasks { get; }
-        int Complete();
+        Task<int> Complete();
     }
 }

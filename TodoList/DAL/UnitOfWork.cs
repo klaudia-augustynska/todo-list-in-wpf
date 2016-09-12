@@ -24,9 +24,9 @@ namespace TodoList.DAL
 
         public ITaskItemRepository Tasks { get; private set; }
 
-        public int Complete()
+        public Task<int> Complete()
         {
-            return _context.SaveChanges();
+            return _context.SaveChangesAsync();
         }
 
         public void Dispose()

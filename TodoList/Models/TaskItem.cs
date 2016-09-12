@@ -12,7 +12,6 @@ namespace TodoList.Models
 
         public int ID { get; set; }
         public string Name { get; set; }
-        public DateTime DateCreated => DateTime.Now;
 
         public DateTime DueToDate
         {

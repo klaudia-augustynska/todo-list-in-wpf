@@ -13,8 +13,8 @@ namespace TodoList.Helpers
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var list = value as List<TaskItem>;
-            if (list == null || list.Count == 0)
+            var list = value as IEnumerable<TaskItem>;
+            if (list == null || !list.Any())
                 return Visibility.Collapsed;
             return Visibility.Visible;
         }
