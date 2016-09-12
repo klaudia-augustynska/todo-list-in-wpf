@@ -80,13 +80,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DAL\IUnitOfWork.cs" />
-    <Compile Include="DAL\Repositories\IRepository.cs" />
-    <Compile Include="DAL\Repositories\ITaskItemRepository.cs" />
-    <Compile Include="DAL\Repositories\Repository.cs" />
-    <Compile Include="DAL\Repositories\TaskItemRepository.cs" />
     <Compile Include="DAL\TodoListContext.cs" />
-    <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="DesignViewModels\MainWindowDesignViewModel.cs" />
     <Compile Include="Helpers\EventAggregator\EventAggregator.cs" />
     <Compile Include="Helpers\EventAggregator\IEventAggregator.cs" />
