@@ -19,12 +19,39 @@ namespace TodoList.ViewModels
     {
         public ICommand AddNewTaskCommand { get; private set; }
         public ICommand RefreshListsCommand { get; private set; }
+        public ICommand ItemCheckedCommand { get; private set; }
+        public ICommand ItemUncheckedCommand { get; private set; }
 
         private void InitializeCommands()
         {
-            AddNewTaskCommand = new RelayCommand(async () => { await OnAddNewTaskCommandExecuted(); }, 
+            AddNewTaskCommand = new RelayCommand(async x => { await OnAddNewTaskCommandExecuted(); }, 
                 CanAddNewTaskCommandExecute);
-            RefreshListsCommand = new RelayCommand(async () => { await OnRefreshListCommandExecuted(); });
+            RefreshListsCommand = new RelayCommand(async x => { await OnRefreshListCommandExecuted(); });
+            ItemCheckedCommand = new RelayCommand(async x => { await OnItemCheckedCommand(x); });
+            ItemUncheckedCommand = new RelayCommand(async x => { await OnItemUncheckedCommand(x); });
+        }
+
+        private async Task OnItemUncheckedCommand(object parameter)
+        {
+            await ToggleItemComplete((TaskItem)parameter);
+        }
+
+        private async Task OnItemCheckedCommand(object parameter)
+        {
+            await ToggleItemComplete((TaskItem)parameter);
+        }
+
+        private async Task ToggleItemComplete(TaskItem item)
+        {
+            await Task.Run(() =>
+            {
+                using (var db = new TodoListContext())
+                {
+                    var itemInDb = db.Tasks.Find(item.ID);
+                    itemInDb.Completed = item.Completed;
+                    db.SaveChanges();
+                }
+            });
         }
 
         private async Task OnRefreshListCommandExecuted()
