@@ -33,16 +33,32 @@ namespace TodoList.ViewModels
 
         public MainWindowViewModel()
         {
+            InitializeLists();
+            InitializeProperties();
+            InitializeEventAggregator();
+            InitializeCommands();
+        }
+
+        private void InitializeProperties()
+        {
+            TaskName = string.Empty;
+            TaskDueToDate = DateTime.Now;
+        }
+
+        private void InitializeEventAggregator()
+        {
+            EventAggregator = new SimpleEventAggregator();
+            EventAggregator.Subscribe(this);
+        }
+
+        private void InitializeLists()
+        {
             OldTasks = new ObservableCollection<TaskItem>();
             CurrentTasks = new ObservableCollection<TaskItem>();
             FollowingTasks = new ObservableCollection<TaskItem>();
             OldTasks.CollectionChanged += (sender, args) => NotifyPropertyChanged(nameof(OldTasks));
             CurrentTasks.CollectionChanged += (sender, args) => NotifyPropertyChanged(nameof(CurrentTasks));
             FollowingTasks.CollectionChanged += (sender, args) => NotifyPropertyChanged(nameof(FollowingTasks));
-            TaskDueToDate = DateTime.Now;
-            InitializeCommands();
-            EventAggregator = new SimpleEventAggregator();
-            EventAggregator.Subscribe(this);
         }
 
         public void OnEvent(TaskItemAdded e)
