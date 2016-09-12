@@ -122,7 +122,7 @@
 
             <Expander IsExpanded="True">
                 <Expander.Header>
-                    <TextBlock Text="{Binding FollowingTasks.Count, StringFormat=W tym tygodniu ({0})}"></TextBlock>
+                    <TextBlock Text="{Binding FollowingTasks.Count, StringFormat=Nadchodzące w tygodniu ({0})}"></TextBlock>
                 </Expander.Header>
                 <StackPanel>
                     <ListBox HorizontalContentAlignment="Stretch"
