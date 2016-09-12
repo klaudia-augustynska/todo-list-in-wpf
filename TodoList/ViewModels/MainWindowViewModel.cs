@@ -116,11 +116,11 @@ namespace TodoList.ViewModels
         private void PutEventToList(TaskItem task)
         {
             if (FindCurrentTasks(task))
-                CurrentTasks.Add(task);
+                CurrentTasks.Insert(0,task);
             else if (FindOldTasks(task))
-                OldTasks.Add(task);
+                OldTasks.Insert(0, task);
             else if (FindFollowingTasks(task))
-                FollowingTasks.Add(task);
+                FollowingTasks.Insert(0, task);
         }
     }
 }
