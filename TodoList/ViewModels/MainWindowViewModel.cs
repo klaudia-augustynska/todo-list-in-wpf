@@ -17,7 +17,7 @@ namespace TodoList.ViewModels
         private string _taskName;
         private DateTime _selectedDate;
         private ObservableCollection<TaskItem> _currentTasks, _oldTasks, _followingTasks;
-        private bool _loading;
+        private bool _loading, _showCompleted;
 
         public ObservableCollection<TaskItem> OldTasks
         {
@@ -77,6 +77,16 @@ namespace TodoList.ViewModels
             }
         }
 
+        public bool ShowCompleted
+        {
+            get { return _showCompleted; }
+            set
+            {
+                _showCompleted = value;
+                NotifyPropertyChanged(nameof(ShowCompleted));
+            }
+        }
+
         public MainWindowViewModel()
         {
             InitializeLists();
@@ -90,6 +100,7 @@ namespace TodoList.ViewModels
             TaskName = string.Empty;
             SelectedDate = DateTime.Now;
             Loading = true;
+            ShowCompleted = false;
         }
 
         private void InitializeEventAggregator()

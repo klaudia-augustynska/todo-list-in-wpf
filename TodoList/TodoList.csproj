@@ -90,6 +90,7 @@
     <Compile Include="Helpers\ListToVisibilityConverter.cs" />
     <Compile Include="Helpers\ListToVisibilityNegatedConverter.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
+    <Compile Include="Helpers\TaskAndShowCompletedToVisibilityConverter.cs" />
     <Compile Include="Migrations\201609111048473_InitialCreate.cs" />
     <Compile Include="Migrations\201609111048473_InitialCreate.Designer.cs">
       <DependentUpon>201609111048473_InitialCreate.cs</DependentUpon>
