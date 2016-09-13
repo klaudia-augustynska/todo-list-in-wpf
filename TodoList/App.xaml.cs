@@ -8,6 +8,7 @@ using System.Windows;
 using Microsoft.Practices.Unity;
 using TodoList.Helpers.EventAggregator;
 using TodoList.ViewModels;
+using TodoList.Views;
 
 namespace TodoList
 {
@@ -23,6 +24,7 @@ namespace TodoList
 
             container.RegisterType<MainWindowViewModel, MainWindowViewModel>();
             container.RegisterType<IEventAggregator, SimpleEventAggregator>(new ContainerControlledLifetimeManager());
+            container.RegisterType<EditTaskWindow, EditTaskWindow>();
 
             var mainWindow = container.Resolve<MainWindow>();
             mainWindow.Show();

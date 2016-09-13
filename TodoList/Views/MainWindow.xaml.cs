@@ -39,7 +39,8 @@ namespace TodoList
 
         public void OnEvent(EnableUserToEditTask e)
         {
-            var window = new EditTaskWindow(e.Task);
+           // var window = new EditTaskWindow(e.Task);
+            var window = _container.Resolve<EditTaskWindow>(new ParameterOverride("item", e.Task));
             window.ShowDialog();
         }
     }
