@@ -45,7 +45,8 @@
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
-                        Grid.Column="0">
+                                Grid.Column="0"
+                                Background="White">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectedDateChanged">
                                 <i:InvokeCommandAction Command="{Binding RefreshListsCommand}"></i:InvokeCommandAction>
