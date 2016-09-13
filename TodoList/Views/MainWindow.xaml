@@ -133,16 +133,16 @@
                          ItemTemplate="{StaticResource TaskListItemTemplate}"
                          ItemsSource="{Binding CurrentTasks, Mode=TwoWay}"
                          ItemContainerStyle="{StaticResource TaskListBoxItemContainerStyle}"
-                         Visibility="{Binding CurrentTasks, Converter={StaticResource ListToVisibilityConverter}}"
+                         Visibility="{Binding CurrentTasks, Mode=TwoWay, Converter={StaticResource ListToVisibilityConverter}}"
                          ContextMenu="{StaticResource TaskListContextMenuTemplate}"
                          Style="{DynamicResource ListBoxWithoutScrollViewer}">
                         </ListBox>
                         <TextBlock Text="Brak zadań do wyświetlenia">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
-                                    <Setter Property="Visibility" Value="{Binding CurrentTasks, Converter={StaticResource ListToVisibilityNegatedConverter}}"></Setter>
+                                    <Setter Property="Visibility" Value="{Binding CurrentTasks, Mode=TwoWay, Converter={StaticResource ListToVisibilityNegatedConverter}}"></Setter>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Loading}" Value="true">
+                                        <DataTrigger Binding="{Binding Loading, Mode=TwoWay}" Value="true">
                                             <Setter Property="Visibility" Value="Collapsed"></Setter>
                                         </DataTrigger>
                                     </Style.Triggers>

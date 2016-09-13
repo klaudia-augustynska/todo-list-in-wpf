@@ -50,6 +50,22 @@ namespace TodoList.Tests.ViewModels.Tests
         }
 
         [Test]
+        public void MainWindowViewModel_CollectionsRaisePropertyChanged()
+        {
+            var propertiesChanged = new List<string>();
+            var vm = new MainWindowViewModel(new SimpleEventAggregator());
+            vm.PropertyChanged += (s, e) => propertiesChanged.Add(e.PropertyName);
+
+            vm.OldTasks.Add(new TaskItem() { Name = "test" });
+            vm.CurrentTasks.Add(new TaskItem() { Name = "test" });
+            vm.FollowingTasks.Add(new TaskItem() { Name = "test" });
+
+            Assert.Contains("OldTasks", propertiesChanged);
+            Assert.Contains("CurrentTasks", propertiesChanged);
+            Assert.Contains("FollowingTasks", propertiesChanged);
+        }
+
+        [Test]
         public void AddNewTaskCommand_WhenEmptyTaskName_CannotExecute()
         {
             var vm = new MainWindowViewModel(new SimpleEventAggregator()) { TaskName = string.Empty };

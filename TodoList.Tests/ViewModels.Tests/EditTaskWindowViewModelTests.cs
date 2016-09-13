@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework.Internal;
 using NUnit.Framework;
+using TodoList.Helpers.EventAggregator;
 using TodoList.Models;
 using TodoList.ViewModels;
 
@@ -27,7 +28,7 @@ namespace TodoList.Tests.ViewModels.Tests
             };
             var response = true;
 
-            var vm = new EditTaskWindowViewModel(task);
+            var vm = new EditTaskWindowViewModel(task, new SimpleEventAggregator());
             response = vm.SaveItemCommand.CanExecute(null);
 
             Assert.IsFalse(response);
@@ -43,7 +44,7 @@ namespace TodoList.Tests.ViewModels.Tests
             };
             var response = false;
 
-            var vm = new EditTaskWindowViewModel(task);
+            var vm = new EditTaskWindowViewModel(task, new SimpleEventAggregator());
             response = vm.SaveItemCommand.CanExecute(null);
 
             Assert.IsTrue(response);
