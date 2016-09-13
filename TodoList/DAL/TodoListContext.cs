@@ -12,6 +12,7 @@ namespace TodoList.DAL
     {
         public TodoListContext() : base("TodoListContext")
         {
+            Database.SetInitializer<TodoListContext>(null);
         }
 
         public DbSet<TaskItem> Tasks { get; set; }
