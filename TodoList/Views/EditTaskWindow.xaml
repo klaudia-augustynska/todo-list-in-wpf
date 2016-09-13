@@ -4,25 +4,36 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TodoList.Views"
+        xmlns:designViewModels="clr-namespace:TodoList.DesignViewModels"
         mc:Ignorable="d"
         Title="EditTaskWindow" Height="200" Width="300">
-    <Grid>
+
+    <Window.Resources>
+
+        <ResourceDictionary>
+            <designViewModels:EditTaskWindowDesignViewModel x:Key="DesignViewModel"></designViewModels:EditTaskWindowDesignViewModel>
+
+        </ResourceDictionary>
+
+    </Window.Resources>
+
+    <Grid d:DataContext="{StaticResource DesignViewModel}">
         
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
         
-        <StackPanel Grid.Row="0">
+        <StackPanel Grid.Row="0" DataContext="{Binding Task}">
             <TextBlock Text="Nazwa"></TextBlock>
-            <TextBox></TextBox>
+            <TextBox Text="{Binding Name, Mode=TwoWay}"></TextBox>
             
             <TextBlock Text="Data"></TextBlock>
-            <DatePicker></DatePicker>
+            <DatePicker SelectedDate="{Binding DueToDate, Mode=TwoWay}"></DatePicker>
 
             <Canvas>
                 <TextBlock Text="Czy zrobione"></TextBlock>
-                <CheckBox Canvas.Right="0"></CheckBox>
+                <CheckBox Canvas.Right="0" IsChecked="{Binding Completed, Mode=TwoWay}"></CheckBox>
             </Canvas>
         </StackPanel>
         

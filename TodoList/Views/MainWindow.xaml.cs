@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Microsoft.Practices.Unity;
 using TodoList.Helpers;
 using TodoList.Helpers.EventAggregator;
+using TodoList.Models;
 using TodoList.ViewModels;
 using TodoList.Views;
 

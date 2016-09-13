@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.Unity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TodoList.Models;
+using TodoList.ViewModels;
 
 namespace TodoList.Views
 {
@@ -20,9 +22,13 @@ namespace TodoList.Views
     /// </summary>
     public partial class EditTaskWindow : Window
     {
-        public EditTaskWindow(TaskItem item)
+        private readonly IUnityContainer _container;
+
+        public EditTaskWindow(IUnityContainer container, TaskItem item)
         {
             InitializeComponent();
+            _container = container;
+            DataContext = _container.Resolve<EditTaskWindowViewModel>(new ParameterOverride("item", item));
         }
     }
 }
