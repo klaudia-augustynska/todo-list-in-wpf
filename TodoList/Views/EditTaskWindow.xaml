@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TodoList.Views"
         xmlns:designViewModels="clr-namespace:TodoList.DesignViewModels"
         mc:Ignorable="d"
-        Title="EditTaskWindow" Height="200" Width="300">
+        Title="Edytuj zadanie" Height="230" Width="300">
 
     <Window.Resources>
 
@@ -21,30 +21,44 @@
         
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         
-        <StackPanel Grid.Row="0" DataContext="{Binding Todo}">
-            <TextBlock Text="Nazwa"></TextBlock>
-            <TextBox Text="{Binding Name, Mode=TwoWay}"></TextBox>
-            
-            <TextBlock Text="Data"></TextBlock>
-            <DatePicker SelectedDate="{Binding DueToDate, Mode=TwoWay}"></DatePicker>
+        <StackPanel Grid.Row="0" 
+                    DataContext="{Binding Todo}"
+                    Margin="15,15,15,15">
+            <TextBlock Text="Nazwa"
+                        Margin="0,0,0,3"></TextBlock>
+            <TextBox Text="{Binding Name, Mode=TwoWay}"
+                     Margin="0,0,0,5"></TextBox>
+
+            <TextBlock Text="Data"
+                        Margin="0,0,0,3"></TextBlock>
+            <DatePicker SelectedDate="{Binding DueToDate, Mode=TwoWay}"
+                        Margin="0,0,0,5"></DatePicker>
 
             <Canvas>
-                <TextBlock Text="Czy zrobione"></TextBlock>
+                <TextBlock Text="Czy zrobione"
+                        Margin="0,0,0,3"></TextBlock>
                 <CheckBox Canvas.Right="0" IsChecked="{Binding Completed, Mode=TwoWay}"></CheckBox>
             </Canvas>
         </StackPanel>
-        
-        <StackPanel Grid.Row="1" 
+
+        <Grid Grid.Row="1"
+                    Background="AntiqueWhite">
+            <StackPanel 
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-            <Button Content="Zapisz"
-                    Command="{Binding SaveItemCommand}"></Button>
-            <Button Content="Anuluj"
+                    VerticalAlignment="Center"
+                Margin="10,10,10,10">
+                <Button Content="Zapisz"
+                    Command="{Binding SaveItemCommand}"
+                        Margin="0,0,5,0"
+                        Padding="10,5,10,5"></Button>
+                <Button Content="Anuluj"
+                        Padding="10,5,10,5"
                     Command="{Binding CancelEditingCommand}"></Button>
-        </StackPanel>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

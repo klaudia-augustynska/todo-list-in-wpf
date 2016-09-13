@@ -31,74 +31,106 @@
     <Grid d:DataContext="{StaticResource DesignViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <TextBlock Text="Todo List" HorizontalAlignment="Left"  />
-            <ToggleButton IsChecked="{Binding ShowCompleted}" 
+        <Grid Grid.Row="0"
+              Background="RosyBrown">
+            
+            <StackPanel Margin="5,5,5,5">
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
+                        Grid.Column="0">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectedDateChanged">
+                                <i:InvokeCommandAction Command="{Binding RefreshListsCommand}"></i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </DatePicker>
+                    <ToggleButton  Grid.Column="1"
+                           IsChecked="{Binding ShowCompleted}" 
                           HorizontalAlignment="Right" 
                           HorizontalContentAlignment="Right" 
-                          Content="Pokazuj wykonane"></ToggleButton>
-        </Grid>
+                          Content="Pokazuj wykonane"
+                          Margin="5,0,0,0"
+                          Padding="5,2,5,2"></ToggleButton>
+                </Grid>
 
-        <DatePicker Grid.Row="1"
-                    SelectedDate="{Binding SelectedDate, Mode=TwoWay}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectedDateChanged">
-                    <i:InvokeCommandAction Command="{Binding RefreshListsCommand}"></i:InvokeCommandAction>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </DatePicker>
 
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Button Content="+"
+                <Grid Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Content="+"
                     Grid.Column="0"
-                    Command="{Binding AddNewTaskCommand}"/>
-            <Grid Grid.Column="1">
-                <TextBox Name="TaskName"
+                    Command="{Binding AddNewTaskCommand}"
+                    Width="25"
+                    Height="25"/>
+                    <Grid Grid.Column="1">
+                        <TextBox Name="TaskName"
+                         Padding="2,0,0,0"
+                         Height="25"
+                         VerticalContentAlignment="Center"
                          Text="{Binding TaskName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                    <TextBox.InputBindings>
-                        <KeyBinding Key="Enter" 
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Enter" 
                                     Command="{Binding AddNewTaskCommand}" 
                                     CommandParameter="{Binding Path=Text, RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}" />
-                    </TextBox.InputBindings>
-                </TextBox>
-                <TextBlock Text="Treść nowego zadania"
-                           IsHitTestVisible="False">
-                    <TextBlock.Style>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="Visibility" Value="Collapsed"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Text, ElementName=TaskName}" Value="">
-                                    <Setter Property="Visibility" Value="Visible"/>
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding IsFocused, ElementName=TaskName}" Value="true">
+                            </TextBox.InputBindings>
+                        </TextBox>
+                        <TextBlock Text="Treść nowego zadania"
+                           IsHitTestVisible="False"
+                           Margin="5,4,0,0"
+                           Foreground="DimGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-            </Grid>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=TaskName}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsFocused, ElementName=TaskName}" Value="true">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+
+            </StackPanel>
+            
+            
+            <!--<TextBlock Text="Todo List" 
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Stretch"
+                       FontStyle="Italic"
+                       Margin="5,5,5,5"/>-->
+
+
         </Grid>
 
-        <ScrollViewer Grid.Row="3" 
-                      VerticalScrollBarVisibility="Auto">
+
+
+        <ScrollViewer Grid.Row="1" 
+                      VerticalScrollBarVisibility="Auto"
+                      Padding="5,5,5,5">
 
             <StackPanel>
 
-                <Expander IsExpanded="False">
+                <Expander IsExpanded="False"
+                          Margin="0,0,0,15">
                     <Expander.Header>
                         <TextBlock Text="Zaległe"></TextBlock>
                     </Expander.Header>
-                    <StackPanel>
+                    <StackPanel Margin="0,5,0,0">
                         <ListBox HorizontalContentAlignment="Stretch"
                          ItemTemplate="{StaticResource TaskListItemWithDateTemplate}"
                          ItemsSource="{Binding OldTasks, Mode=TwoWay}"
@@ -124,11 +156,12 @@
                     </StackPanel>
                 </Expander>
 
-                <Expander IsExpanded="True">
+                <Expander IsExpanded="True"
+                          Margin="0,0,0,15">
                     <Expander.Header>
                         <TextBlock Text="{Binding SelectedDate, StringFormat=Wybrany dzień ({0:yyyy-MM-dd})}"></TextBlock>
                     </Expander.Header>
-                    <StackPanel>
+                    <StackPanel Margin="0,5,0,0">
                         <ListBox HorizontalContentAlignment="Stretch"
                          ItemTemplate="{StaticResource TaskListItemTemplate}"
                          ItemsSource="{Binding CurrentTasks, Mode=TwoWay}"
@@ -154,11 +187,12 @@
                     </StackPanel>
                 </Expander>
 
-                <Expander IsExpanded="False">
+                <Expander IsExpanded="False"
+                          Margin="0,0,0,15">
                     <Expander.Header>
                         <TextBlock Text="Nadchodzące w tygodniu"></TextBlock>
                     </Expander.Header>
-                    <StackPanel>
+                    <StackPanel Margin="0,5,0,0">
                         <ListBox HorizontalContentAlignment="Stretch"
                          ItemTemplate="{StaticResource TaskListItemWithDateTemplate}"
                          ItemsSource="{Binding FollowingTasks, Mode=TwoWay}"
