@@ -56,7 +56,10 @@ AncestorType={x:Type CheckBox}}}"></i:InvokeCommandAction>
                   Command="{Binding SendEventThatSomethingShouldEnableUserToEditTaskCommand}"
                   CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, 
 AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}"/>
-        <MenuItem Header="Usuń" />
+        <MenuItem Header="Usuń"
+                  Command="{Binding DeleteTodoCommand}"
+                  CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, 
+AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}" />
     </ContextMenu>
     
     <SolidColorBrush x:Key="ListBox.Static.Background" Color="#FFFFFFFF"/>

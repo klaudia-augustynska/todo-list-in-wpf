@@ -11,9 +11,10 @@ using TodoList.Models;
 namespace TodoList.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase, 
-        ISubscriber<TaskItemAdded>, ISubscriber<TaskItemUpdated>
+        ISubscriber<TaskItemAdded>, ISubscriber<TaskItemUpdated>, ISubscriber<TaskItemDeleted>
     {
         private IEventAggregator _eventAggregator { get; set; }
+        private Dictionary<ListType, ObservableCollection<TaskItem>> _typesToListDictionary;
 
         private string _taskName;
         private DateTime _selectedDate;
@@ -218,6 +219,11 @@ namespace TodoList.ViewModels
             FollowingTasks
         }
 
-        private Dictionary<ListType, ObservableCollection<TaskItem>> _typesToListDictionary;
+        public void OnEvent(TaskItemDeleted e)
+        {
+            var list = LocalizeOnList(e.Task);
+            var element = _typesToListDictionary[list].First(x => x.ID == e.Task.ID);
+            _typesToListDictionary[list].Remove(element);
+        }
     }
 }

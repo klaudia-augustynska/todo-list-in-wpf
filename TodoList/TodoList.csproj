@@ -104,6 +104,7 @@
     <Compile Include="Helpers\EventAggregator\SimpleEventAggregator.cs" />
     <Compile Include="Helpers\EventAggregator\IEventAggregator.cs" />
     <Compile Include="Helpers\EventAggregator\TaskItemAdded.cs" />
+    <Compile Include="Helpers\EventAggregator\TaskItemDeleted.cs" />
     <Compile Include="Helpers\EventAggregator\TaskItemUpdated.cs" />
     <Compile Include="Helpers\EventAggregator\TodoEditorShouldCloseItself.cs" />
     <Compile Include="Helpers\ISubscriber.cs" />

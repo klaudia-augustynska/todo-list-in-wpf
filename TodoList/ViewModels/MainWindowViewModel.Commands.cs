@@ -22,6 +22,7 @@ namespace TodoList.ViewModels
         public ICommand ItemCheckedCommand { get; private set; }
         public ICommand ItemUncheckedCommand { get; private set; }
         public ICommand SendEventThatSomethingShouldEnableUserToEditTaskCommand { get; private set; }
+        public ICommand DeleteTodoCommand { get; private set; }
 
         private void InitializeCommands()
         {
@@ -31,6 +32,23 @@ namespace TodoList.ViewModels
             ItemCheckedCommand = new RelayCommand(async x => { await OnItemCheckedCommand(x); });
             ItemUncheckedCommand = new RelayCommand(async x => { await OnItemUncheckedCommand(x); });
             SendEventThatSomethingShouldEnableUserToEditTaskCommand = new RelayCommand(OnSendEventThatSomethingShouldEnableUserToEditTaskCommand);
+            DeleteTodoCommand = new RelayCommand(async x => { await OnDeleteTodoCommandExecute(x); });
+        }
+
+        private async Task OnDeleteTodoCommandExecute(object parameter)
+        {
+            var item = (TaskItem)parameter;
+            _eventAggregator.Publish(new TaskItemDeleted(item));
+
+            await Task.Run(() =>
+            {
+                using (var db = new TodoListContext())
+                {
+                    var itemToDelete = db.Tasks.Find(item.ID);
+                    db.Tasks.Remove(itemToDelete);
+                    db.SaveChanges();
+                }
+            });
         }
 
         private void OnSendEventThatSomethingShouldEnableUserToEditTaskCommand(object parameter)
