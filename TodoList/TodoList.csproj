@@ -104,6 +104,8 @@
     <Compile Include="Helpers\EventAggregator\SimpleEventAggregator.cs" />
     <Compile Include="Helpers\EventAggregator\IEventAggregator.cs" />
     <Compile Include="Helpers\EventAggregator\TaskItemAdded.cs" />
+    <Compile Include="Helpers\EventAggregator\TaskItemUpdated.cs" />
+    <Compile Include="Helpers\EventAggregator\TodoEditorShouldCloseItself.cs" />
     <Compile Include="Helpers\ISubscriber.cs" />
     <Compile Include="Helpers\ListToVisibilityConverter.cs" />
     <Compile Include="Helpers\ListToVisibilityNegatedConverter.cs" />
@@ -122,6 +124,7 @@
       <DependentUpon>201609111140591_migracja2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ViewModels\EditTaskWindowViewModel.Commands.cs" />
     <Compile Include="ViewModels\EditTaskWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.Commands.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />

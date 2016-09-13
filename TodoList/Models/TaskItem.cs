@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TodoList.Models
 {
-    public class TaskItem : INotifyPropertyChanged
+    public class TaskItem : INotifyPropertyChanged, ICloneable
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -15,7 +15,12 @@ namespace TodoList.Models
         private string _name;
         private bool _completed;
 
-        public int ID { get; set; }
+        private int _id;
+        public int ID
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
 
         public string Name
         {
@@ -66,6 +71,18 @@ namespace TodoList.Models
         {
             PropertyChanged?.Invoke(this,
                 new PropertyChangedEventArgs(propertyName));
+        }
+
+        public object Clone()
+        {
+            TaskItem clone = new TaskItem
+            {
+                Name = _name,
+                Completed = _completed,
+                DueToDate = _dueToDate,
+                ID = _id
+            };
+            return clone;
         }
     }
 }

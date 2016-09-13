@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TodoList.Helpers;
+using TodoList.Helpers.EventAggregator;
 using TodoList.Models;
 using TodoList.ViewModels;
 
@@ -20,15 +22,23 @@ namespace TodoList.Views
     /// <summary>
     /// Interaction logic for EditTaskWindow.xaml
     /// </summary>
-    public partial class EditTaskWindow : Window
+    public partial class EditTaskWindow : Window, ISubscriber<TodoEditorShouldCloseItself>
     {
         private readonly IUnityContainer _container;
+        private readonly IEventAggregator _eventAggregator;
 
-        public EditTaskWindow(IUnityContainer container, TaskItem item)
+        public EditTaskWindow(IUnityContainer container, IEventAggregator eventAggregator, TaskItem item)
         {
             InitializeComponent();
             _container = container;
+            _eventAggregator = eventAggregator;
+            eventAggregator.Subscribe(this);
             DataContext = _container.Resolve<EditTaskWindowViewModel>(new ParameterOverride("item", item));
+        }
+
+        public void OnEvent(TodoEditorShouldCloseItself e)
+        {
+            Close();
         }
     }
 }

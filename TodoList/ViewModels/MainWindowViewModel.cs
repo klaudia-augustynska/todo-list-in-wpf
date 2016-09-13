@@ -10,7 +10,8 @@ using TodoList.Models;
 
 namespace TodoList.ViewModels
 {
-    public partial class MainWindowViewModel : ViewModelBase, ISubscriber<TaskItemAdded>
+    public partial class MainWindowViewModel : ViewModelBase, 
+        ISubscriber<TaskItemAdded>, ISubscriber<TaskItemUpdated>
     {
         private IEventAggregator _eventAggregator { get; set; }
 
@@ -25,6 +26,7 @@ namespace TodoList.ViewModels
             set
             {
                 _oldTasks = value;
+                _typesToListDictionary[ListType.OldTasks] = _oldTasks;
                 NotifyPropertyChanged(nameof(OldTasks));
             }
         }
@@ -34,6 +36,7 @@ namespace TodoList.ViewModels
             set
             {
                 _currentTasks = value;
+                _typesToListDictionary[ListType.CurrentTasks] = _currentTasks;
                 NotifyPropertyChanged(nameof(CurrentTasks));
             }
         }
@@ -43,6 +46,7 @@ namespace TodoList.ViewModels
             set
             {
                 _followingTasks = value;
+                _typesToListDictionary[ListType.FollowingTasks] = _followingTasks;
                 NotifyPropertyChanged(nameof(FollowingTasks));
             }
         }
@@ -96,6 +100,17 @@ namespace TodoList.ViewModels
             InitializeCommands();
         }
 
+        private Dictionary<ListType, ObservableCollection<TaskItem>> GetTypesToListDictionary()
+        {
+            return new Dictionary<ListType, ObservableCollection<TaskItem>>
+            {
+                { ListType.OldTasks, _oldTasks },
+                { ListType.CurrentTasks, _currentTasks },
+                { ListType.FollowingTasks, _followingTasks },
+                { ListType.Undefined, null }
+            };
+        }
+
         private void InitializeProperties()
         {
             TaskName = string.Empty;
@@ -106,6 +121,7 @@ namespace TodoList.ViewModels
 
         private void InitializeLists()
         {
+            _typesToListDictionary = GetTypesToListDictionary();
             OldTasks = new ObservableCollection<TaskItem>();
             CurrentTasks = new ObservableCollection<TaskItem>();
             FollowingTasks = new ObservableCollection<TaskItem>();
@@ -121,12 +137,87 @@ namespace TodoList.ViewModels
 
         private void PutEventToList(TaskItem task)
         {
-            if (FindCurrentTasks(task))
-                CurrentTasks.Insert(0,task);
-            else if (FindOldTasks(task))
-                OldTasks.Insert(0, task);
-            else if (FindFollowingTasks(task))
-                FollowingTasks.Insert(0, task);
+            var type = FindTypeOfList(task);
+            switch (type)
+            {
+                case ListType.OldTasks:
+                    OldTasks.Insert(0, task);
+                    break;
+                case ListType.CurrentTasks:
+                    CurrentTasks.Insert(0, task);
+                    break;
+                case ListType.FollowingTasks:
+                    FollowingTasks.Insert(0, task);
+                    break;
+            }
         }
+
+        private ListType FindTypeOfList(TaskItem task)
+        {
+            if (FindCurrentTasks(task))
+                return ListType.CurrentTasks;
+            else if (FindOldTasks(task))
+                return ListType.OldTasks;
+            else if (FindFollowingTasks(task))
+                return ListType.FollowingTasks;
+            return ListType.Undefined;
+        }
+
+        private ListType LocalizeOnList(TaskItem task)
+        {
+            if (OldTasks.SingleOrDefault(x => x.ID == task.ID) != default (TaskItem))
+                return ListType.OldTasks;
+            if (CurrentTasks.SingleOrDefault(x => x.ID == task.ID) != default(TaskItem))
+                return ListType.CurrentTasks;
+            if (FollowingTasks.SingleOrDefault(x => x.ID == task.ID) != default(TaskItem))
+                return ListType.FollowingTasks;
+            return ListType.Undefined;
+        }
+
+        public void OnEvent(TaskItemUpdated e)
+        {
+            var currentList = LocalizeOnList(e.Task);
+            var desiredList = FindTypeOfList(e.Task);
+            if (currentList != desiredList)
+            {
+                MoveToProperList(currentList, e.Task);
+            }
+            else
+            {
+                UpdateAtList(currentList, e.Task);
+            }
+        }
+
+        private void UpdateAtList(ListType list, TaskItem task)
+        {
+            try
+            {
+                var aa = _typesToListDictionary[list];
+                var itemInList = aa.First(x => x.ID == task.ID);
+                itemInList.Name = task.Name;
+                itemInList.DueToDate = task.DueToDate;
+                itemInList.Completed = task.Completed;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void MoveToProperList(ListType currentList, TaskItem task)
+        {
+            var item = _typesToListDictionary[currentList].First(x => x.ID == task.ID);
+            _typesToListDictionary[currentList].Remove(item);
+            PutEventToList(task);
+        }
+
+        private enum ListType
+        {
+            Undefined = 0,
+            OldTasks = 1,
+            CurrentTasks = 2,
+            FollowingTasks
+        }
+
+        private Dictionary<ListType, ObservableCollection<TaskItem>> _typesToListDictionary;
     }
 }

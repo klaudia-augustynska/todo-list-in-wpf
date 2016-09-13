@@ -19,7 +19,7 @@ namespace TodoList.Tests.ViewModels.Tests
         [Test]
         public void MainWindowViewModel_InitsProperties()
         {
-            var vm = new MainWindowViewModel();
+            var vm = new MainWindowViewModel(new SimpleEventAggregator());
 
             Assert.IsNotNull(vm.OldTasks);
             Assert.IsNotNull(vm.CurrentTasks);
@@ -32,7 +32,7 @@ namespace TodoList.Tests.ViewModels.Tests
         public void MainWindowViewModel_PropertiesRaiseCollectionChanged()
         {
             var propertiesChanged = new List<string>();
-            var vm = new MainWindowViewModel();
+            var vm = new MainWindowViewModel(new SimpleEventAggregator());
             vm.OldTasks.CollectionChanged += (s, e) => propertiesChanged.Add(((TaskItem)e.NewItems[0]).Name);
             vm.CurrentTasks.CollectionChanged += (s, e) => propertiesChanged.Add(((TaskItem)e.NewItems[0]).Name);
             vm.FollowingTasks.CollectionChanged += (s, e) => propertiesChanged.Add(((TaskItem)e.NewItems[0]).Name);
@@ -52,7 +52,7 @@ namespace TodoList.Tests.ViewModels.Tests
         [Test]
         public void AddNewTaskCommand_WhenEmptyTaskName_CannotExecute()
         {
-            var vm = new MainWindowViewModel { TaskName = string.Empty };
+            var vm = new MainWindowViewModel(new SimpleEventAggregator()) { TaskName = string.Empty };
             var canExecute = false;
 
             canExecute = vm.AddNewTaskCommand.CanExecute(null);

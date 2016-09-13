@@ -21,7 +21,7 @@ namespace TodoList.ViewModels
         public ICommand RefreshListsCommand { get; private set; }
         public ICommand ItemCheckedCommand { get; private set; }
         public ICommand ItemUncheckedCommand { get; private set; }
-        public ICommand SendEventThatSomethingShouldEnableUserToEditTask { get; private set; }
+        public ICommand SendEventThatSomethingShouldEnableUserToEditTaskCommand { get; private set; }
 
         private void InitializeCommands()
         {
@@ -30,7 +30,7 @@ namespace TodoList.ViewModels
             RefreshListsCommand = new RelayCommand(async x => { await OnRefreshListCommandExecuted(); });
             ItemCheckedCommand = new RelayCommand(async x => { await OnItemCheckedCommand(x); });
             ItemUncheckedCommand = new RelayCommand(async x => { await OnItemUncheckedCommand(x); });
-            SendEventThatSomethingShouldEnableUserToEditTask = new RelayCommand(OnSendEventThatSomethingShouldEnableUserToEditTaskCommand);
+            SendEventThatSomethingShouldEnableUserToEditTaskCommand = new RelayCommand(OnSendEventThatSomethingShouldEnableUserToEditTaskCommand);
         }
 
         private void OnSendEventThatSomethingShouldEnableUserToEditTaskCommand(object parameter)

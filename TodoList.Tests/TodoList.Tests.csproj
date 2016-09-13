@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels.Tests\EditTaskWindowViewModelTests.cs" />
     <Compile Include="ViewModels.Tests\MainWindowViewModelTests.cs" />
     <Compile Include="ViewModels.Tests\ViewModelBaseTests.cs" />
   </ItemGroup>

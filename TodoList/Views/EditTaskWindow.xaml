@@ -24,7 +24,7 @@
             <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
         
-        <StackPanel Grid.Row="0" DataContext="{Binding Task}">
+        <StackPanel Grid.Row="0" DataContext="{Binding Todo}">
             <TextBlock Text="Nazwa"></TextBlock>
             <TextBox Text="{Binding Name, Mode=TwoWay}"></TextBox>
             
@@ -41,8 +41,10 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-            <Button Content="Zapisz"></Button>
-            <Button Content="Anuluj"></Button>
+            <Button Content="Zapisz"
+                    Command="{Binding SaveItemCommand}"></Button>
+            <Button Content="Anuluj"
+                    Command="{Binding CancelEditingCommand}"></Button>
         </StackPanel>
     </Grid>
 </Window>

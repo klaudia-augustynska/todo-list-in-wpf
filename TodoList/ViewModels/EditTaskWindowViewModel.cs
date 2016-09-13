@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TodoList.Helpers.EventAggregator;
 using TodoList.Models;
 
 namespace TodoList.ViewModels
 {
-    public class EditTaskWindowViewModel : ViewModelBase
+    public partial class EditTaskWindowViewModel : ViewModelBase
     {
-        public TaskItem Task { get; set; }
+        private readonly IEventAggregator _eventAggregator;
 
-        public EditTaskWindowViewModel(TaskItem item)
+        public TaskItem Todo { get; set; }
+
+        public EditTaskWindowViewModel(TaskItem item, IEventAggregator eventAggregator)
         {
-            Task = item;
+            Todo = (TaskItem) item.Clone();
+            _eventAggregator = eventAggregator;
+            InitializeCommands();
         }
     }
 }

@@ -9,11 +9,11 @@ namespace TodoList.DesignViewModels
 {
     class EditTaskWindowDesignViewModel
     {
-        public TaskItem Task { get; set; }
+        public TaskItem Todo { get; set; }
 
         public EditTaskWindowDesignViewModel()
         {
-            Task = GetTask();
+            Todo = GetTask();
         }
 
         private TaskItem GetTask()
