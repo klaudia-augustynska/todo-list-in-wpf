@@ -53,7 +53,7 @@ AncestorType={x:Type CheckBox}}}"></i:InvokeCommandAction>
 
     <ContextMenu x:Key="TaskListContextMenuTemplate">
         <MenuItem Header="Edytuj" 
-                  Command="{Binding SendEventThatSomethingShouldEnableUserToEditTaskCommand}"
+                  Command="{Binding EditTodoCommand}"
                   CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, 
 AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}"/>
         <MenuItem Header="Usuń"

@@ -21,7 +21,7 @@ namespace TodoList.ViewModels
         public ICommand RefreshListsCommand { get; private set; }
         public ICommand ItemCheckedCommand { get; private set; }
         public ICommand ItemUncheckedCommand { get; private set; }
-        public ICommand SendEventThatSomethingShouldEnableUserToEditTaskCommand { get; private set; }
+        public ICommand EditTodoCommand { get; private set; }
         public ICommand DeleteTodoCommand { get; private set; }
 
         private void InitializeCommands()
@@ -31,7 +31,7 @@ namespace TodoList.ViewModels
             RefreshListsCommand = new RelayCommand(async x => { await OnRefreshListCommandExecuted(); });
             ItemCheckedCommand = new RelayCommand(async x => { await OnItemCheckedCommand(x); });
             ItemUncheckedCommand = new RelayCommand(async x => { await OnItemUncheckedCommand(x); });
-            SendEventThatSomethingShouldEnableUserToEditTaskCommand = new RelayCommand(OnSendEventThatSomethingShouldEnableUserToEditTaskCommand);
+            EditTodoCommand = new RelayCommand(OnEditTodoCommand);
             DeleteTodoCommand = new RelayCommand(async x => { await OnDeleteTodoCommandExecute(x); });
         }
 
@@ -51,7 +51,7 @@ namespace TodoList.ViewModels
             });
         }
 
-        private void OnSendEventThatSomethingShouldEnableUserToEditTaskCommand(object parameter)
+        private void OnEditTodoCommand(object parameter)
         {
             var item = (TaskItem) parameter;
             _eventAggregator.Publish(new EnableUserToEditTask(item));
