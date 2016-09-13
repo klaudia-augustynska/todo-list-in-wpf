@@ -21,6 +21,7 @@ namespace TodoList.ViewModels
         public ICommand RefreshListsCommand { get; private set; }
         public ICommand ItemCheckedCommand { get; private set; }
         public ICommand ItemUncheckedCommand { get; private set; }
+        public ICommand SendEventThatSomethingShouldEnableUserToEditTask { get; private set; }
 
         private void InitializeCommands()
         {
@@ -29,6 +30,13 @@ namespace TodoList.ViewModels
             RefreshListsCommand = new RelayCommand(async x => { await OnRefreshListCommandExecuted(); });
             ItemCheckedCommand = new RelayCommand(async x => { await OnItemCheckedCommand(x); });
             ItemUncheckedCommand = new RelayCommand(async x => { await OnItemUncheckedCommand(x); });
+            SendEventThatSomethingShouldEnableUserToEditTask = new RelayCommand(OnSendEventThatSomethingShouldEnableUserToEditTaskCommand);
+        }
+
+        private void OnSendEventThatSomethingShouldEnableUserToEditTaskCommand(object parameter)
+        {
+            var item = (TaskItem) parameter;
+            _eventAggregator.Publish(new EnableUserToEditTask(item));
         }
 
         private async Task OnItemUncheckedCommand(object parameter)
@@ -89,14 +97,14 @@ namespace TodoList.ViewModels
         private async Task OnAddNewTaskCommandExecuted()
         {
             var task = new TaskItem { Name = TaskName };
-            EventAggregator.Publish(new TaskItemAdded(task));
+            _eventAggregator.Publish(new TaskItemAdded(task));
             TaskName = string.Empty;
             await Task.Run(() =>
             {
                 using (var db = new TodoListContext())
                 {
                     db.Tasks.Add(task);
-                    db.SaveChangesAsync();
+                    db.SaveChanges();
                 }
             });
         }

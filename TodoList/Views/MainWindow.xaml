@@ -9,10 +9,6 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
         Title="TodoList" Height="400" Width="300">
-    
-    <Window.DataContext>
-        <vm:MainWindowViewModel></vm:MainWindowViewModel>
-    </Window.DataContext>
 
     <Window.Resources>
 

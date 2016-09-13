@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TodoList.Models;
 
 namespace TodoList.Views
 {
@@ -19,7 +20,7 @@ namespace TodoList.Views
     /// </summary>
     public partial class EditTaskWindow : Window
     {
-        public EditTaskWindow()
+        public EditTaskWindow(TaskItem item)
         {
             InitializeComponent();
         }

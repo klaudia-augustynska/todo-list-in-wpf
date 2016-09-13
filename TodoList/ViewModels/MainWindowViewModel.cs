@@ -12,7 +12,7 @@ namespace TodoList.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase, ISubscriber<TaskItemAdded>
     {
-        private IEventAggregator EventAggregator { get; set; }
+        private IEventAggregator _eventAggregator { get; set; }
 
         private string _taskName;
         private DateTime _selectedDate;
@@ -87,11 +87,12 @@ namespace TodoList.ViewModels
             }
         }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
+            _eventAggregator.Subscribe(this);
             InitializeLists();
             InitializeProperties();
-            InitializeEventAggregator();
             InitializeCommands();
         }
 
@@ -101,12 +102,6 @@ namespace TodoList.ViewModels
             SelectedDate = DateTime.Now;
             Loading = true;
             ShowCompleted = false;
-        }
-
-        private void InitializeEventAggregator()
-        {
-            EventAggregator = new SimpleEventAggregator();
-            EventAggregator.Subscribe(this);
         }
 
         private void InitializeLists()

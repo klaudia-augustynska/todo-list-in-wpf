@@ -12,17 +12,35 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Practices.Unity;
+using TodoList.Helpers;
+using TodoList.Helpers.EventAggregator;
+using TodoList.ViewModels;
+using TodoList.Views;
 
 namespace TodoList
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, ISubscriber<EnableUserToEditTask>
     {
-        public MainWindow()
+        private readonly IUnityContainer _container;
+        private IEventAggregator _eventAggregator;
+
+        public MainWindow(IUnityContainer container, IEventAggregator eventAggregator)
         {
             InitializeComponent();
+            _container = container;
+            _eventAggregator = eventAggregator;
+            DataContext = _container.Resolve<MainWindowViewModel>();
+            _eventAggregator.Subscribe(this);
+        }
+
+        public void OnEvent(EnableUserToEditTask e)
+        {
+            var window = new EditTaskWindow(e.Task);
+            window.ShowDialog();
         }
     }
 }
