@@ -82,16 +82,29 @@ namespace TodoList.ViewModels
 
         private async Task OnRefreshListCommandExecuted()
         {
+            ObservableCollection<TaskItem> old = null, current = null, following = null;
             await Task.Run(() =>
             {
                 using (var db = new TodoListContext())
                 {
-                    OldTasks = GetTasks(db, FindOldTasks);
-                    CurrentTasks = GetTasks(db, FindCurrentTasks);
-                    FollowingTasks = GetTasks(db, FindFollowingTasks);
+                    old = GetTasks(db, FindOldTasks);
+                    current = GetTasks(db, FindCurrentTasks);
+                    following = GetTasks(db, FindFollowingTasks);
                 }
                 Loading = false;
             });
+            ReplaceList(OldTasks, old);
+            ReplaceList(CurrentTasks, current);
+            ReplaceList(FollowingTasks, following);
+        }
+
+        private void ReplaceList(ObservableCollection<TaskItem> listToReplace, ObservableCollection<TaskItem> replaceWith)
+        {
+            if (listToReplace == null || replaceWith == null)
+                return;
+            listToReplace.Clear();
+            foreach (var item in replaceWith)
+                listToReplace.Add(item);
         }
 
         private ObservableCollection<TaskItem> GetTasks(TodoListContext db, Func<TaskItem, bool> predicate)

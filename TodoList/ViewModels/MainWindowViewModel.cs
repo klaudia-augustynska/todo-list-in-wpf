@@ -27,8 +27,6 @@ namespace TodoList.ViewModels
             set
             {
                 _oldTasks = value;
-                _oldTasks.CollectionChanged += (sender, args) => NotifyPropertyChanged(nameof(OldTasks));
-                _typesToListDictionary[ListType.OldTasks] = _oldTasks;
                 NotifyPropertyChanged(nameof(OldTasks));
             }
         }
@@ -38,8 +36,6 @@ namespace TodoList.ViewModels
             set
             {
                 _currentTasks = value;
-                _currentTasks.CollectionChanged += (sender, args) => NotifyPropertyChanged(nameof(CurrentTasks));
-                _typesToListDictionary[ListType.CurrentTasks] = _currentTasks;
                 NotifyPropertyChanged(nameof(CurrentTasks));
             }
         }
@@ -49,8 +45,6 @@ namespace TodoList.ViewModels
             set
             {
                 _followingTasks = value;
-                _followingTasks.CollectionChanged += (sender, args) => NotifyPropertyChanged(nameof(FollowingTasks));
-                _typesToListDictionary[ListType.FollowingTasks] = _followingTasks;
                 NotifyPropertyChanged(nameof(FollowingTasks));
             }
         }
@@ -125,13 +119,13 @@ namespace TodoList.ViewModels
 
         private void InitializeLists()
         {
-            _typesToListDictionary = GetTypesToListDictionary();
             OldTasks = new ObservableCollection<TaskItem>();
             CurrentTasks = new ObservableCollection<TaskItem>();
             FollowingTasks = new ObservableCollection<TaskItem>();
             OldTasks.CollectionChanged += (sender, args) => NotifyPropertyChanged(nameof(OldTasks));
             CurrentTasks.CollectionChanged += (sender, args) => NotifyPropertyChanged(nameof(CurrentTasks));
             FollowingTasks.CollectionChanged += (sender, args) => NotifyPropertyChanged(nameof(FollowingTasks));
+            _typesToListDictionary = GetTypesToListDictionary();
         }
 
         public void OnEvent(TaskItemAdded e)
