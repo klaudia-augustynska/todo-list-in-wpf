@@ -30,7 +30,8 @@
             <TextBlock Text="Nazwa"
                         Margin="0,0,0,3"></TextBlock>
             <TextBox Text="{Binding Name, Mode=TwoWay}"
-                     Margin="0,0,0,5"></TextBox>
+                     Margin="0,0,0,5"
+                         Padding="2,3,0,3"></TextBox>
 
             <TextBlock Text="Data"
                         Margin="0,0,0,3"></TextBlock>
@@ -45,7 +46,7 @@
         </StackPanel>
 
         <Grid Grid.Row="1"
-                    Background="AntiqueWhite">
+                    Background="PowderBlue">
             <StackPanel 
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"

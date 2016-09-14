@@ -36,86 +36,83 @@
 
         <Grid Grid.Row="0"
               Background="LightSkyBlue">
-            <Border BorderThickness="0,0,0,3"
-                    BorderBrush="LightGray">
-                <StackPanel Margin="5,5,5,5">
+            <StackPanel Margin="5,5,5,5">
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
                                 Grid.Column="0"
                                 Background="White">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="SelectedDateChanged">
-                                    <i:InvokeCommandAction Command="{Binding RefreshListsCommand}"></i:InvokeCommandAction>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </DatePicker>
-                        <ToggleButton  Grid.Column="1"
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectedDateChanged">
+                                <i:InvokeCommandAction Command="{Binding RefreshListsCommand}"></i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </DatePicker>
+                    <ToggleButton  Grid.Column="1"
                            IsChecked="{Binding ShowCompleted}" 
                           HorizontalAlignment="Right" 
                           HorizontalContentAlignment="Right" 
                           Content="Pokazuj wykonane"
                           Margin="5,0,0,0"
                           Padding="5,2,5,2"></ToggleButton>
-                    </Grid>
+                </Grid>
 
 
-                    <Grid Margin="0,5,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Button Content="+"
+                <Grid Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Content="+"
                     Grid.Column="0"
                     Command="{Binding AddNewTaskCommand}"
                     Width="25"
                     Height="25"/>
-                        <Grid Grid.Column="1">
-                            <TextBox Name="TaskName"
+                    <Grid Grid.Column="1">
+                        <TextBox Name="TaskName"
                          Padding="2,0,0,0"
                          Height="25"
                          VerticalContentAlignment="Center"
                          Text="{Binding TaskName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                                <TextBox.InputBindings>
-                                    <KeyBinding Key="Enter" 
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Enter" 
                                     Command="{Binding AddNewTaskCommand}" 
                                     CommandParameter="{Binding Path=Text, RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}" />
-                                </TextBox.InputBindings>
-                            </TextBox>
-                            <TextBlock Text="Treść nowego zadania"
+                            </TextBox.InputBindings>
+                        </TextBox>
+                        <TextBlock Text="Treść nowego zadania"
                            IsHitTestVisible="False"
                            Margin="5,4,0,0"
                            Foreground="DimGray">
-                                <TextBlock.Style>
-                                    <Style TargetType="{x:Type TextBlock}">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=TaskName}" Value="">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding IsFocused, ElementName=TaskName}" Value="true">
-                                                <Setter Property="Visibility" Value="Collapsed"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-                        </Grid>
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=TaskName}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsFocused, ElementName=TaskName}" Value="true">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                     </Grid>
+                </Grid>
 
-                </StackPanel>
-            </Border>
+            </StackPanel>
         </Grid>
 
         <ScrollViewer Grid.Row="1" 
                       VerticalScrollBarVisibility="Auto"
-                      Padding="5,5,5,5">
+                      Padding="5,0,5,0">
 
-            <StackPanel>
+            <StackPanel Margin="0,10,0,10">
 
                 <Expander IsExpanded="False"
                           Margin="0,0,0,15">
