@@ -37,7 +37,9 @@ AncestorType={x:Type CheckBox}}}"></i:InvokeCommandAction>
                 <ColumnDefinition Width="80"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <CheckBox Template="{StaticResource TaskListItemCheckBoxTemplate}"></CheckBox>
-            <TextBlock Grid.Column="1" Text="{Binding Name, Mode=TwoWay}"></TextBlock>
+            <TextBlock Grid.Column="1" 
+                       Text="{Binding Name, Mode=TwoWay}"
+                       TextWrapping="Wrap"></TextBlock>
             <TextBlock Grid.Column="2" 
                        Text="{Binding DueToDate, StringFormat=d, Mode=TwoWay}"
                        HorizontalAlignment="Right"></TextBlock>
@@ -45,10 +47,16 @@ AncestorType={x:Type CheckBox}}}"></i:InvokeCommandAction>
     </DataTemplate>
 
     <DataTemplate x:Key="TaskListItemTemplate">
-        <StackPanel Orientation="Horizontal">
-            <CheckBox Template="{StaticResource TaskListItemCheckBoxTemplate}" Width="20"></CheckBox>
-            <TextBlock Text="{Binding Name, Mode=TwoWay}"></TextBlock>
-        </StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <CheckBox Template="{StaticResource TaskListItemCheckBoxTemplate}"></CheckBox>
+            <TextBlock Grid.Column="1" 
+                       Text="{Binding Name, Mode=TwoWay}"
+                       TextWrapping="Wrap"></TextBlock>
+        </Grid>
     </DataTemplate>
 
     <ContextMenu x:Key="TaskListContextMenuTemplate">
@@ -80,7 +88,7 @@ AncestorType={x:Type ContextMenu}}, Path=PlacementTarget.SelectedItem}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBox}">
-                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true">
+                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true">
                         <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                     </Border>
                     <ControlTemplate.Triggers>
