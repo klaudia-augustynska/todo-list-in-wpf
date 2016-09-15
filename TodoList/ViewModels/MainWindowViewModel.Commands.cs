@@ -127,7 +127,7 @@ namespace TodoList.ViewModels
 
         private async Task OnAddNewTaskCommandExecuted()
         {
-            var task = new TaskItem { Name = TaskName };
+            var task = new TaskItem { Name = TaskName, DueToDate = SelectedDate};
             _eventAggregator.Publish(new TaskItemAdded(task));
             TaskName = string.Empty;
             await Task.Run(() =>
